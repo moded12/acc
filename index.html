@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a246a">
+  <title>برنامج أبو محمود السوري للمحاسبة</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== شاشة تسجيل الدخول ===== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-container">
+    <div class="login-header">
+      <div class="login-logo">🏪</div>
+      <h1>برنامج أبو محمود السوري للمحاسبة</h1>
+      <p>نظام متكامل لإدارة الفواتير والزبائن</p>
+    </div>
+    
+    <div class="login-body">
+      <!-- نموذج تسجيل الدخول -->
+      <div id="usernamePasswordForm" class="login-form">
+        <h2>تسجيل الدخول</h2>
+        
+        <div class="form-group">
+          <label for="loginUsername">اسم المستخدم:</label>
+          <input type="text" id="loginUsername" class="form-input" placeholder="أدخل اسم المستخدم" autocomplete="username">
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword">كلمة المرور:</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="أدخل كلمة المرور" autocomplete="current-password">
+        </div>
+        
+        <div class="form-group checkbox">
+          <input type="checkbox" id="rememberMe">
+          <label for="rememberMe">تذكرني</label>
+        </div>
+        
+        <button class="btn-primary" onclick="loginWithUsernamePassword()">دخول</button>
+        
+        <div class="form-footer">
+          <p>ليس لديك حساب؟ <a href="#" onclick="toggleRegisterForm(event)">إنشاء حساب جديد</a></p>
+          <p><a href="#" onclick="toggleForgotPasswordForm(event)">نسيت كلمة المرور؟</a></p>
+        </div>
+      </div>
+
+      <!-- نموذج التسجيل -->
+      <div id="registerForm" class="login-form" style="display: none;">
+        <h2>إنشاء حساب جديد</h2>
+        
+        <div class="form-group">
+          <label for="registerUsername">اسم المستخدم:</label>
+          <input type="text" id="registerUsername" class="form-input" placeholder="اختر اسم مستخدم" autocomplete="username">
+          <small id="usernameError" class="error-text"></small>
+        </div>
+        
+        <div class="form-group">
+          <label for="registerEmail">البريد الإلكتروني:</label>
+          <input type="email" id="registerEmail" class="form-input" placeholder="أدخل بريدك الإلكتروني" autocomplete="email">
+          <small id="emailError" class="error-text"></small>
+        </div>
+        
+        <div class="form-group">
+          <label for="registerPassword">كلمة المرور:</label>
+          <input type="password" id="registerPassword" class="form-input" placeholder="اختر كلمة مرور قوية" autocomplete="new-password">
+          <small id="passwordError" class="error-text"></small>
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">تأكيد كلمة المرور:</label>
+          <input type="password" id="confirmPassword" class="form-input" placeholder="أعد إدخال كلمة المرور" autocomplete="new-password">
+          <small id="confirmError" class="error-text"></small>
+        </div>
+        
+        <button class="btn-primary" onclick="registerNewUser()">إنشاء الحساب</button>
+        
+        <div class="form-footer">
+          <p>هل لديك حساب بالفعل؟ <a href="#" onclick="toggleRegisterForm(event)">تسجيل الدخول</a></p>
+        </div>
+      </div>
+      
+      <!-- نموذج استعادة كلمة المرور -->
+      <div id="forgotPasswordForm" class="login-form" style="display: none;">
+        <h2>استعادة كلمة المرور</h2>
+        
+        <div class="form-group">
+          <label for="forgotEmail">البريد الإلكتروني:</label>
+          <input type="email" id="forgotEmail" class="form-input" placeholder="أدخل بريدك الإلكتروني" autocomplete="email">
+          <small id="forgotEmailError" class="error-text"></small>
+        </div>
+        
+        <p style="font-size: 12px; color: #666; text-align: center; margin: 10px 0;">
+          سيتم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني
+        </p>
+        
+        <button class="btn-primary" onclick="sendPasswordResetEmail()">إرسال رابط الاستعادة</button>
+        
+        <div class="form-footer">
+          <p><a href="#" onclick="toggleForgotPasswordForm(event)">← العودة لتسجيل الدخول</a></p>
+        </div>
+      </div>
+
+      <!-- نموذج تغيير كلمة المرور -->
+      <div id="changePasswordForm" class="login-form" style="display: none;">
+        <h2>تغيير كلمة المرور</h2>
+        
+        <div class="form-group">
+          <label for="currentPassword">كلمة المرور الحالية:</label>
+          <input type="password" id="currentPassword" class="form-input" placeholder="أدخل كلمة المرور الحالية" autocomplete="current-password">
+          <small id="currentPasswordError" class="error-text"></small>
+        </div>
+        
+        <div class="form-group">
+          <label for="newPassword">كلمة المرور الجديدة:</label>
+          <input type="password" id="newPassword" class="form-input" placeholder="أدخل كلمة المرور الجديدة" autocomplete="new-password">
+          <small id="newPasswordError" class="error-text"></small>
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmNewPassword">تأكيد كلمة المرور الجديدة:</label>
+          <input type="password" id="confirmNewPassword" class="form-input" placeholder="أعد إدخال كلمة المرور الجديدة" autocomplete="new-password">
+          <small id="confirmNewPasswordError" class="error-text"></small>
+        </div>
+        
+        <button class="btn-primary" onclick="changePassword()">تحديث كلمة المرور</button>
+        
+        <div class="form-footer">
+          <p><a href="#" onclick="closeChangePasswordModal()">← إلغاء</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="login-footer">
+      <p>جميع الحقوق محفوظة © 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== البرنامج الرئيسي ===== -->
+<div class="app-container" id="appContainer" style="display: none;">
+
+  <!-- شريط العنوان -->
+  <div class="title-bar">
+    <div class="title-bar-text">🏪 المحاسبة</div>
+    <div class="title-bar-controls">
+      <span onclick="toggleMenu()" title="القائمة">☰</span>
+    </div>
+  </div>
+
+  <!-- القائمة الرئيسية -->
+  <div class="menu" id="mainMenu" style="display: none;">
+    <div class="menu-item active" onclick="showInvoiceForm(); closeMenu()">📄 فاتورة جديدة</div>
+    <div class="menu-item" onclick="showCustomers(); closeMenu()">👥 الزبائن</div>
+    <div class="menu-item" onclick="showReports(); closeMenu()">📊 التقارير</div>
+    <div class="menu-item" onclick="showSavedInvoices(); closeMenu()">📋 الفواتير المحفوظة</div>
+    <div class="menu-item" onclick="exportData(); closeMenu()">📥 تصدير البيانات</div>
+    <hr style="margin: 8px 0;">
+    <div class="menu-item" onclick="openChangePasswordModal(); closeMenu()">🔐 تغيير كلمة المرور</div>
+    <div class="menu-item" onclick="showAbout(); closeMenu()">ℹ️ حول البرنامج</div>
+    <div class="menu-item" onclick="logoutUser(); closeMenu()">🚪 تسجيل الخروج</div>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="content">
+
+    <!-- ===== قسم الفاتورة الجديدة ===== -->
+    <div class="section active" id="invoiceSection">
+      <div class="card">
+        <div class="card-title">معلومات الفاتورة</div>
+        <div class="form-group">
+          <label>اسم الزبون:</label>
+          <div class="btn-group">
+            <input type="text" id="customerName" placeholder="اختر زبون" readonly>
+            <button class="btn-primary" onclick="showCustomerSelector()">اختر</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>التاريخ:</label>
+          <input type="date" id="invoiceDate">
+        </div>
+        
+        <div class="form-group">
+          <label>النوع:</label>
+          <input type="text" id="invoiceType" placeholder="أدخل نوع الفاتورة">
+        </div>
+      </div>
+
+      <!-- جدول الفاتورة -->
+      <div class="card">
+        <div class="card-title">الأصناف</div>
+        <table class="invoice-table" id="invoiceTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الصنف</th>
+              <th>الكمية</th>
+              <th>السعر</th>
+              <th>المجموع</th>
+            </tr>
+          </thead>
+          <tbody id="invoiceBody">
+          </tbody>
+        </table>
+        
+        <div class="btn-group">
+          <button class="btn-success" onclick="addRow()">+ إضافة صنف</button>
+          <button class="btn-danger" onclick="clearTable()">مسح الجدول</button>
+        </div>
+      </div>
+
+      <!-- ملاحظات -->
+      <div class="card">
+        <div class="card-title">ملاحظات</div>
+        <textarea id="invoiceNotes" placeholder="أدخل أي ملاحظات..." style="min-height: 80px;"></textarea>
+      </div>
+
+      <!-- الملخص المالي -->
+      <div class="card" style="background: #e8f4f8; border-right-color: #0066cc;">
+        <div class="total-row">
+          <span>المجموع:</span>
+          <strong id="grandTotal"></strong>
+        </div>
+        <div class="total-row">
+          <span>المدفوع:</span>
+          <input type="number" id="amountPaid" value="0" min="0" onchange="calculateBalance()" style="flex: 1; padding: 8px;">
+        </div>
+        <div class="total-row" style="color: #0066cc; font-weight: bold;">
+          <span>المتبقي:</span>
+          <strong id="balance"></strong>
+        </div>
+      </div>
+
+      <!-- أزرار الفاتورة -->
+      <div class="btn-group">
+        <button class="btn-success" onclick="saveInvoice()">💾 حفظ</button>
+        <button class="btn-primary" onclick="printInvoice()">🖨️ طباعة</button>
+        <button class="btn-secondary" onclick="newInvoice()">📄 جديد</button>
+      </div>
+    </div>
+
+    <!-- ===== قسم الزبائن ===== -->
+    <div class="section" id="customersSection">
+      <div class="card">
+        <button class="btn-success" onclick="addNewCustomerModal()">+ إضافة زبون جديد</button>
+      </div>
+      
+      <div class="card">
+        <input type="text" id="customerSearchInput" placeholder="ابحث عن زبون..." oninput="searchCustomers()" style="margin-bottom: 10px;">
+        <div id="customerListContainer"></div>
+      </div>
+    </div>
+
+    <!-- ===== قسم التقارير ===== -->
+    <div class="section" id="reportsSection">
+      <div id="reportsContent"></div>
+    </div>
+
+    <!-- ===== قسم الفواتير المحفوظة ===== -->
+    <div class="section" id="savedInvoicesSection">
+      <div id="savedInvoicesList"></div>
+    </div>
+
+  </div>
+
+  <!-- شريط الحالة -->
+  <div class="status-bar">
+    <span id="statusMessage">جاهز</span>
+  </div>
+
+</div>
+
+<!-- ===== النوافذ المنبثقة ===== -->
+
+<!-- نافذة اختيار الزبون -->
+<div class="modal" id="customerSelectorModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">اختر زبون</h3>
+      <button class="modal-close" onclick="closeModal('customerSelectorModal')">✕</button>
+    </div>
+    <div>
+      <input type="text" id="customerSearchInput2" placeholder="ابحث عن زبون..." oninput="searchCustomers()" style="margin-bottom: 10px; width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      <button class="btn-success" onclick="addNewCustomerModal()" style="width: 100%; margin-bottom: 10px;">+ إضافة زبون جديد</button>
+      <div id="customerListModal"></div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة إضافة زبون -->
+<div class="modal" id="addCustomerModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">إضافة زبون جديد</h3>
+      <button class="modal-close" onclick="closeModal('addCustomerModal')">✕</button>
+    </div>
+    <div>
+      <div class="form-group">
+        <label>اسم الزبون:</label>
+        <input type="text" id="newCustomerName" placeholder="اسم الزبون الكامل">
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف:</label>
+        <input type="text" id="newCustomerPhone" placeholder="رقم الهاتف">
+      </div>
+      <div class="form-group">
+        <label>العنوان:</label>
+        <input type="text" id="newCustomerAddress" placeholder="العنوان">
+      </div>
+      <div class="btn-group">
+        <button class="btn-success" onclick="saveNewCustomer()">حفظ</button>
+        <button class="btn-secondary" onclick="closeModal('addCustomerModal')">إلغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة تغيير كلمة المرور -->
+<div class="modal" id="changePasswordModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">تغيير كلمة المرور</h3>
+      <button class="modal-close" onclick="closeModal('changePasswordModal')">✕</button>
+    </div>
+    <div>
+      <div class="form-group">
+        <label>كلمة المرور الحالية:</label>
+        <input type="password" id="modalCurrentPassword" placeholder="أدخل كلمة المرور الحالية" autocomplete="current-password">
+        <small id="modalCurrentPasswordError" class="error-text"></small>
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور الجديدة:</label>
+        <input type="password" id="modalNewPassword" placeholder="أدخل كلمة مرور جديدة" autocomplete="new-password">
+        <small id="modalNewPasswordError" class="error-text"></small>
+      </div>
+      <div class="form-group">
+        <label>تأكيد كلمة المرور الجديدة:</label>
+        <input type="password" id="modalConfirmNewPassword" placeholder="أعد إدخال كلمة المرور" autocomplete="new-password">
+        <small id="modalConfirmNewPasswordError" class="error-text"></small>
+      </div>
+      <div class="btn-group">
+        <button class="btn-success" onclick="changePasswordFromModal()">تحديث</button>
+        <button class="btn-secondary" onclick="closeModal('changePasswordModal')">إلغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة حول البرنامج -->
+<div class="modal" id="aboutModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">حول البرنامج</h3>
+      <button class="modal-close" onclick="closeModal('aboutModal')">✕</button>
+    </div>
+    <div style="text-align: center;">
+      <div style="font-size: 48px; margin: 15px;">🏪</div>
+      <h2>برنامج أبو محمود السوري للمحاسبة</h2>
+      <p style="color: #666;">الإصدار 3.0.0</p>
+      <p style="color: #666;">نظام متكامل لإدارة الفواتير والزبائن</p>
+      <p style="font-size: 12px; color: #999;">متوافق مع الجوال • نظام أمني متقدم</p>
+      <hr>
+      <p style="font-size: 12px; color: #666;">جميع الحقوق محفوظة © 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script src="auth.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
