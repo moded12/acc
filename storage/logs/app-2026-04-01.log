@@ -1,0 +1,31 @@
+[2026-04-01 19:22:59] ERROR: Application error {"message":"Call to undefined method App\\Models\\User::db()","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Models/User.php","line":23}
+[2026-04-01 19:23:46] ERROR: Application error {"message":"Call to undefined method App\\Models\\User::db()","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Models/User.php","line":23}
+[2026-04-01 19:25:25] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:25:33] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:28:22] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:28:24] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:28:52] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:29:46] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:29:48] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:30:31] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:30:59] INFO: Failed login attempt {"email":"admin@erp.local"}
+[2026-04-01 19:34:24] INFO: User logged in {"email":"admin@erp.local"}
+[2026-04-01 16:55:19] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:55:20] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:56:10] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:56:14] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:57:42] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:57:58] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:57:58] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:57:59] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:58:38] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:58:40] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:58:41] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 16:58:42] ERROR: Application error {"message":"Path cannot be empty","file":"/var/www/vhosts/shneler.com/httpdocs/20/accounting/app/Views/layouts/master.php","line":56}
+[2026-04-01 21:07:33] INFO: User logged in {"email":"admin@erp.local"}
+[2026-04-01 21:07:45] INFO: User logged in {"email":"admin@erp.local"}
+[2026-04-01 21:13:10] INFO: User logged in {"email":"admin@erp.local"}
+[2026-04-01 21:36:37] INFO: Customer/Supplier created {"name":"محمد 1","type":"customer"}
+[2026-04-01 21:37:18] INFO: Customer/Supplier created {"name":"محمد مورد","type":"supplier"}
+[2026-04-01 21:38:29] INFO: User logged in {"email":"admin@erp.local"}
+[2026-04-01 22:59:14] INFO: User logged in {"email":"admin@erp.local"}
